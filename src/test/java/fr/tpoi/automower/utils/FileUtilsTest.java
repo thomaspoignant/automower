@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FileUtilsTest
 {
@@ -20,5 +20,12 @@ class FileUtilsTest
     expected.add("3 3 E");
     expected.add("FFRFFRFRRF");
     assertThat(FileUtils.readFileInResource("input")).isEqualTo(expected);
+  }
+  
+  @Test
+  void readFileInResource_noFile()
+  {
+    assertThatCode(()-> FileUtils.readFileInResource("input2"))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 }

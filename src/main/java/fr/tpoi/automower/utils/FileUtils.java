@@ -14,6 +14,4 @@ public class FileUtils
     URL url = Resources.getResource(fileName);
     return Resources.readLines(url, Charsets.UTF_8);
   }
-  
-  
 }

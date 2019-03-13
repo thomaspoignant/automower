@@ -42,7 +42,4 @@ public class Application
       lineIterator=lineIterator+2;
     }
   }
-  
-  
-  
 }
