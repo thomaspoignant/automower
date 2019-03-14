@@ -38,4 +38,4 @@ LFLFLFLFF
 3 3 E
 FFRFFRFRRF
 *result*
-13 N 51 E
+13 N 51 E  
