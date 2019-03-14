@@ -62,6 +62,12 @@ public class InputFileExtractor
                                             .y(Integer.parseInt(mowerLineElements[1]))
                                             .orientation(Orientation.valueOf(mowerLineElements[2]))
                                             .build();
+
+      if(lineIterator+1==lines.size()){
+        //last line is supposed to be a movement
+        throw new InvalidInputFile();
+      }
+
       Movement currentAutomowerMove = Movement.builder().movementLine(lines.get(lineIterator+1)).build();
       movementLineMap.put(currentAutomower,currentAutomowerMove);
       inputFileExtractor.setAutomowerAndMove(movementLineMap);

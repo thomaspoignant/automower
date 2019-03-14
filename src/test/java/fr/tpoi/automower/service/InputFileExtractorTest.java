@@ -39,4 +39,11 @@ class InputFileExtractorTest
     assertThat(input.getMaxY()).isEqualTo(5);
     assertThat(input.getAutomowerAndMove().size()).isEqualTo(2);
   }
+
+  @Test
+  void extractInputFile_invalid_move_missing_movement()
+  {
+    assertThatCode(()->InputFileExtractor.extractInputFile("input_invalid_mower_missing_movement"))
+        .isInstanceOf(InvalidInputFile.class);
+  }
 }

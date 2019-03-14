@@ -36,7 +36,7 @@ public class Garden
         automower.turnRight();
         break;
       case F:
-        automower.move(maxX, maxY);
+        automower.moveForward(maxX, maxY);
         break;
     }
   }

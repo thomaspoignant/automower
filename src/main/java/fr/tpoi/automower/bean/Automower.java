@@ -24,7 +24,7 @@ public class Automower
     this.orientation = OrientationUtils.turnRight(this.orientation);
   }
   
-  public void move(final int maxX, final int maxY)
+  public void moveForward(final int maxX, final int maxY)
   {
     switch(this.getOrientation()){
       case N:{
