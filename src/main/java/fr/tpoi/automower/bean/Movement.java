@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class Movement
-{
+public class Movement {
+
   private String movementLine;
 }

@@ -6,20 +6,19 @@ import fr.tpoi.automower.service.InputFileExtractor;
 
 import java.io.IOException;
 
-public class Application
-{
+public class Application {
 
-  public static void main (String... args)
-  {
-    try{
+  public static void main(String... args) {
+    try {
       InputFileExtractor input = InputFileExtractor.extractInputFile("input");
-      Garden garden = Garden.builder().maxX(input.getMaxX()).maxY(input.getMaxY()).mowers(input.getAutomowerAndMove()).build();
+      Garden garden = Garden.builder().maxX(input.getMaxX()).maxY(input.getMaxY())
+          .automowers(input.getAutomowerAndMove()).build();
       garden.moveAutomowers();
-      garden.getMowers()
-            .forEach((mower,movementLine)->System.out.println(mower));
+      garden.getAutomowers()
+          .forEach((mower, movementLine) -> System.out.println(mower));
     } catch (InvalidInputFile invalidInputFile) {
       System.err.println(invalidInputFile.getMessage());
-    } catch (IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
