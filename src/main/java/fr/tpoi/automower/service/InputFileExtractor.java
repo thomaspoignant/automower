@@ -31,14 +31,9 @@ public class InputFileExtractor
     
     //get information for firstline
     String[] configSquareLine = lines.get(0).split(" ");
-    if(configSquareLine.length!=2
-        || !NumberUtils.isCreatable(configSquareLine[0])
-        || !NumberUtils.isCreatable(configSquareLine[1])){
-      throw new InvalidInputFile();
-    }
+    checkValidityConfigSquareLine(configSquareLine);
     
     InputFileExtractor inputFileExtractor = new InputFileExtractor();
-  
     inputFileExtractor.setMaxX(Integer.parseInt(configSquareLine[0]));
     inputFileExtractor.setMaxY(Integer.parseInt(configSquareLine[1]));
     
@@ -49,14 +44,8 @@ public class InputFileExtractor
     while(lineIterator<lines.size()){
       String mowerLine = lines.get(lineIterator);
       String[] mowerLineElements = mowerLine.split(" ");
-      
-      if(mowerLineElements.length!=3
-          || !NumberUtils.isCreatable(mowerLineElements[0])
-          || !NumberUtils.isCreatable(mowerLineElements[1])
-          || mowerLineElements[2].length()!=1){
-        throw new InvalidInputFile();
-      }
-      
+      checkValidityAutomowerConfigLine(mowerLineElements);
+
       Automower currentAutomower = Automower.builder()
                                             .x(Integer.parseInt(mowerLineElements[0]))
                                             .y(Integer.parseInt(mowerLineElements[1]))
@@ -65,7 +54,7 @@ public class InputFileExtractor
 
       if(lineIterator+1==lines.size()){
         //last line is supposed to be a movement
-        throw new InvalidInputFile();
+        throw new InvalidInputFile("Missing movement line");
       }
 
       Movement currentAutomowerMove = Movement.builder().movementLine(lines.get(lineIterator+1)).build();
@@ -77,4 +66,28 @@ public class InputFileExtractor
     
     return inputFileExtractor;
   }
+
+  private static void checkValidityConfigSquareLine(final String[] configSquareLine) throws InvalidInputFile{
+    if(configSquareLine.length!=2){
+      throw new InvalidInputFile("Incorrect number of elements to configure the garden");
+    }
+    if(!NumberUtils.isCreatable(configSquareLine[0]) || !NumberUtils.isCreatable(configSquareLine[1])){
+      throw new InvalidInputFile("Impossible to configure garden with non numeric elements");
+    }
+  }
+
+  private static void checkValidityAutomowerConfigLine(final String[] mowerLineElements) throws InvalidInputFile{
+    if(mowerLineElements.length!=3){
+      throw new InvalidInputFile("Incorrect number of elements to configure the automower");
+    }
+    if(!NumberUtils.isCreatable(mowerLineElements[0]) || !NumberUtils.isCreatable(mowerLineElements[1])){
+      throw new InvalidInputFile("Impossible to configure automower with non numeric elements");
+    }
+    try{
+      Orientation.valueOf(mowerLineElements[2]);
+    } catch(IllegalArgumentException e) {
+      throw new InvalidInputFile("This orientation is not authorized",e);
+    }
+  }
+
 }

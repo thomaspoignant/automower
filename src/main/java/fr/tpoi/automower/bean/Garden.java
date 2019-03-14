@@ -9,17 +9,22 @@ import java.util.Map;
 @Builder
 public class Garden
 {
+  /** maxX is the max X value in the grid*/
   private int maxX;
+  /** maxY is the max Y value in the grid*/
   private int maxY;
   private Map<Automower, Movement> mowers;
-  
-  public void moveMowers()
+
+  /**
+   * This method move all the automower on the grid
+   */
+  public void moveAutomowers()
   {
     mowers.forEach(
-        (mower, movement)-> moveCurrentMower(mower, movement.getMovementLine()));
+        (mower, movement)-> moveCurrentAutomower(mower, movement.getMovementLine()));
   }
   
-  private void moveCurrentMower(final Automower automower, final String movementLine)
+  private void moveCurrentAutomower(final Automower automower, final String movementLine)
   {
     movementLine.chars()
         .forEachOrdered(i -> updatePosition(automower, (char)i));

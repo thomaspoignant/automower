@@ -10,8 +10,11 @@ import lombok.ToString;
 @Builder
 public class Automower
 {
+  /** Current x position on the grid */
   private int x = 0;
+  /** Current y position on the grid */
   private int y = 0;
+  /** Orientation of the automower */
   private Orientation orientation;
   
   public void turnLeft()

@@ -18,7 +18,7 @@ public class GardenTest
     
     
     Garden garden = Garden.builder().maxX(5).maxY(5).mowers(mowerMovement).build();
-    garden.moveMowers();
+    garden.moveAutomowers();
     
     assertThat(automower.getX()).isEqualTo(1);
     assertThat(automower.getY()).isEqualTo(3);
@@ -34,7 +34,7 @@ public class GardenTest
     
     
     Garden garden = Garden.builder().maxX(5).maxY(5).mowers(mowerMovement).build();
-    garden.moveMowers();
+    garden.moveAutomowers();
   
     assertThat(automower.getX()).isEqualTo(5);
     assertThat(automower.getY()).isEqualTo(1);
@@ -50,7 +50,7 @@ public class GardenTest
     
     
     Garden garden = Garden.builder().maxX(5).maxY(5).mowers(mowerMovement).build();
-    garden.moveMowers();
+    garden.moveAutomowers();
     
     assertThat(automower.getX()).isEqualTo(3);
     assertThat(automower.getY()).isEqualTo(3);

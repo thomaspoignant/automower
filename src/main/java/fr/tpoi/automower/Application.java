@@ -14,7 +14,7 @@ public class Application
     try{
       InputFileExtractor input = InputFileExtractor.extractInputFile("input");
       Garden garden = Garden.builder().maxX(input.getMaxX()).maxY(input.getMaxY()).mowers(input.getAutomowerAndMove()).build();
-      garden.moveMowers();
+      garden.moveAutomowers();
       garden.getMowers()
             .forEach((mower,movementLine)->System.out.println(mower));
     } catch (InvalidInputFile invalidInputFile) {
