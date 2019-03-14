@@ -1,41 +1,42 @@
 package fr.tpoi.automower.bean;
 
-import fr.tpoi.automower.exception.InvalidInitialPosition;
-import java.util.ArrayList;
-import java.util.List;
-import fr.tpoi.automower.utils.PositionUtils;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Map;
 
 @Getter
-@AllArgsConstructor
+@Builder
 public class Garden
 {
   private int maxX;
   private int maxY;
+  private Map<Automower, Movement> mowers;
   
-  public void moveMower(final Mower mower, final String movementLine)
+  public void moveMowers()
+  {
+    mowers.forEach(
+        (mower, movement)-> moveCurrentMower(mower, movement.getMovementLine()));
+  }
+  
+  private void moveCurrentMower(final Automower automower, final String movementLine)
   {
     movementLine.chars()
-        .forEachOrdered(i -> updatePosition(mower,(char)i));
+        .forEachOrdered(i -> updatePosition(automower, (char)i));
   }
 
-  private void updatePosition(final Mower mower, final char action)
+  private void updatePosition(final Automower automower, final char action)
   {
     Action currentAction = Action.valueOf(String.valueOf(action));
     switch(currentAction){
       case L:
-        mower.turnLeft();
+        automower.turnLeft();
         break;
       case R:
-        mower.turnRight();
+        automower.turnRight();
         break;
       case F:
-        mower.move(maxX,maxY);
-        break;
-      default:
-        //exception
+        automower.move(maxX, maxY);
         break;
     }
   }

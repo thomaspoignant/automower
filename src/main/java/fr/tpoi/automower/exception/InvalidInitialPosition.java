@@ -1,15 +1,15 @@
 package fr.tpoi.automower.exception;
 
 import fr.tpoi.automower.bean.Garden;
-import fr.tpoi.automower.bean.Mower;
+import fr.tpoi.automower.bean.Automower;
 
 public class InvalidInitialPosition extends Exception
 {
-  public InvalidInitialPosition(final Mower mower, final Garden garden)
+  public InvalidInitialPosition(final Automower automower, final Garden garden)
   {
-    super("Invalid initial position, mower is not in the garden [x:"+mower.getX()
+    super("Invalid initial position, automower is not in the garden [x:"+ automower.getX()
               +",maxX:"+garden.getMaxX()
-              +",y:"+mower.getY()
+              +",y:"+ automower.getY()
               +",maxY:"+garden.getMaxY()
               +"]");
   }

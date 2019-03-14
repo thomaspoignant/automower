@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @Getter
 @Builder
-public class Mower
+public class Automower
 {
   private int x = 0;
   private int y = 0;
@@ -27,33 +27,26 @@ public class Mower
   public void move(final int maxX, final int maxY)
   {
     switch(this.getOrientation()){
-      case N:
-      {
+      case N:{
         int nextY = y+1;
         y = nextY > maxY ? maxY : nextY;
         break;
       }
-      case S:
-      {
+      case S:{
         int nextY = y-1;
         y = nextY < 0 ? 0 : nextY;
         break;
       }
-      case E:
-      {
+      case E:{
         int nextX = x+1;
         x = nextX > maxX ? maxX : nextX;
         break;
       }
-      case W:
-      {
+      case W:{
         int nextX = x-1;
         x = nextX < 0 ? 0 : nextX;
         break;
       }
-      default:
-        //exception
-        break;
     }
   }
   
